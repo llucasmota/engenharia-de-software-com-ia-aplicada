@@ -1,7 +1,8 @@
-import tf from '@tensorflow/tfjs-node';
+import tf from '@tensorflow/tfjs-node'
 
 
 async function trainModel(inputXs, outputYs) {
+
     const model = tf.sequential()
 
     // Primeira camada da rede:
@@ -13,70 +14,61 @@ async function trainModel(inputXs, outputYs) {
 
     // A ReLU age como um filtro:
     // É como se ela deixasse somente os dados interessantes seguirem viagem na rede
-    /// Se a informação chegou nesse neuronio é positiva, passa para frente!
+    // Se a informação chegou nesse neuronio é positiva, passa para frente!
     // se for zero ou negativa, pode jogar fora, nao vai servir para nada
-    model.add(tf.layers.dense({ inputShape: [7], units: 80, activation: 'relu' }))
+    model.add(tf.layers.dense({inputShape: [7], units: 80, activation: 'relu' }))
 
-    // Saída: 3 neuronios
-    // um para cada categoria (premium, medium, basic)
+    // Saída: 3 neurônios, pois são 3 categorias
+    // um para cada categoria(premium, medium, basic)
+    model.add(tf.layers.dense({units: 3, activation: 'softmax' }))
 
-    // activation: softmax normaliza a saida em probabilidades
-    model.add(tf.layers.dense({ units: 3, activation: 'softmax' }))
-
-    // Compilando o modelo
-    // optimizer Adam ( Adaptive Moment Estimation)
-    // é um treinador pessoal moderno para redes neurais:
-    // ajusta os pesos de forma eficiente e inteligente
-    // aprender com historico de erros e acertos
+    // Compilação do modelo
+    // optimizer: Adam (Adaptative Moment Estimation)
+   // é um treinador pessoal moderno para redes neurais
+   // ele ajusta os pesos da rede para minimizar o erro
+   //aprender com o histórico de erros e acertos
 
     // loss: categoricalCrossentropy
-    // Ele compara o que o modelo "acha" (os scores de cada categoria)
-    // com a resposta certa
-    // a categoria premium será sempre [1, 0, 0]
+    // Ele compara o que o model "acha"(os scores de cada categoria)
+    // com o que é verdade (o label)
+    //Exemplo clárissco: classificação de imagens, recomendação, categorização de usuário
 
-    // quanto mais distante da previsão do modelo da resposta correta
-    // maior o erro (loss)
-    // Exemplo classico: classificação de imagens, recomendação, categorização de
-    // usuário
-    // qualquer coisa em que a resposta certa é "apenas uma entre várias possíveis"
-
+    // qualquer coisa que a resposta é uma entre várias
     model.compile({
-        optimizer: 'adam',
-        loss: 'categoricalCrossentropy',
+        optimizer: 'adam', 
+        loss: 'categoricalCrossentropy', 
         metrics: ['accuracy']
     })
 
-    // Treinamento do modelo
-    // verbose: desabilita o log interno (e usa só callback)
-    // epochs: quantidade de veses que vai rodar no dataset
-    // shuffle: embaralha os dados, para evitar viés
+    // treinamento do modelo
+    // epochs: quantas vezes o modelo vai ver os dados
+    //shuffle: embaralhar os dados
+
     await model.fit(
         inputXs,
         outputYs,
-        {
-            verbose: 0,
-            epochs: 100,
-            shuffle: true,
-            callbacks: {
-                // onEpochEnd: (epoch, log) => console.log(
-                //     `Epoch: ${epoch}: loss = ${log.loss}`
-                // )
-            }
-        }
-    )
-
-    return model
+       {
+        verbose: 0,
+        epochs: 100,
+        shuffle: true,
+        // callbacks: {
+        //     onEpochEnd: (epoch, logs) => console.log(`Epoch: ${epoch}, Loss: ${logs.loss}`)
+        //     }
+        }        
+    )  
+    return model  
 }
+
 
 async function predict(model, pessoa) {
-    // transformar o array js para o tensor (tfjs)
-    const tfInput = tf.tensor2d(pessoa)
+  // transform a js array to a tensor 
+  const tfInput = tf.tensor2d(pessoa)
+  const prediction = model.predict(tfInput)
+  const arrayPredict = await prediction.array()
+  return arrayPredict[0].map((prob, index) => ({ prob, index }))
 
-    // Faz a predição (output será um vetor de 3 probabilidades)
-    const pred = model.predict(tfInput)
-    const predArray = await pred.array()
-    return predArray[0].map((prob, index) => ({ prob, index }))
 }
+
 // Exemplo de pessoas para treino (cada pessoa com idade, cor e localização)
 // const pessoas = [
 //     { nome: "Erick", idade: 30, cor: "azul", localizacao: "São Paulo" },
@@ -91,6 +83,7 @@ async function predict(model, pessoa) {
 //     [0, 0, 1, 0, 0, 1, 0],    // Ana
 //     [1, 0, 0, 1, 0, 0, 1]     // Carlos
 // ]
+
 
 // Usamos apenas os dados numéricos, como a rede neural só entende números.
 // tensorPessoasNormalizado corresponde ao dataset de entrada do modelo.
@@ -109,34 +102,33 @@ const tensorLabels = [
     [0, 0, 1]  // basic - Carlos
 ];
 
+
 // Criamos tensores de entrada (xs) e saída (ys) para treinar o modelo
 const inputXs = tf.tensor2d(tensorPessoasNormalizado)
 const outputYs = tf.tensor2d(tensorLabels)
 
-// quanto mais dado melhor!
-// assim o algoritmo consegue entender melhor os padrões complexos
-// dos dados
+
 const model = await trainModel(inputXs, outputYs)
 
-const pessoa = { nome: 'zé', idade: 28, cor: 'verde', localizacao: "Curitiba" }
-// Normalizando a idade da nova pessoa usando o mesmo padrão do treino
-// Exemplo: idade_min = 25, idade_max = 40, então (28 - 25) / (40 - 25 ) = 0.2
 
-const pessoaTensorNormalizado = [
+const zePerson = { nome: "Zé", idade: 28, cor: "verde", localizacao: "Curitiba" }
+
+// idade normalizada: (idade - idade_min) / (idade_max - idade_min)
+// idade_min = 25, idade_max = 40, então (28 - 25) / (40 - 25 ) = 0.2
+
+const zePersonNormalizado = [
     [
         0.2, // idade normalizada
-        1,    // cor azul
-        0,    // cor vermelho
-        0,    // cor verde
-        0,    // localização São Paulo
-        1,    // localização Rio
-        0     // localização Curitiba
+        0,   // azul
+        0,   // vermelho
+        1,   // verde
+        0,   // São Paulo
+        0,   // Rio
+        1    // Curitiba
     ]
 ]
 
-const predictions = await predict(model, pessoaTensorNormalizado)
-const results = predictions
-    .sort((a, b) => b.prob - a.prob)
-    .map(p => `${labelsNomes[p.index]} (${(p.prob * 100).toFixed(2)}%)`)
-    .join('\n')
-console.log(results)
+const predictionResult = await predict(model, zePersonNormalizado)
+const result = predictionResult.sort((a, b) => b.prob - a.prob).map(p => `${labelsNomes[p.index]} (${(p.prob * 100).toFixed(2)}%)`).join('\n')
+
+console.log(result)
