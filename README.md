@@ -40,7 +40,7 @@ Wear Presentations:
 
 ##### 1.3.1
 
-Projeto em [exemplo00](./modulo01-fundamentos-de-ia-e-llms-para-programadores/demos/exemplo-00/)
+Projeto em [exemplo00](./modulo01-fundamentos-de-ia-e-llms-para-programadores/exemplo-00-z/)
 
 - https://poloclub.github.io/cnn-explainer/
 - https://poloclub.github.io/ganlab/
@@ -57,14 +57,14 @@ Simulated Spotify Listening Experiences for Reinforcement Learning with TensorFl
 
 ##### 1.3.2 Como Construir um Sistema de Recomendação Inteligente com Redes Neurais no Navegador
 
-Projeto em [exemplo01](./modulo01-fundamentos-de-ia-e-llms-para-programadores/demos/exemplo-01/)
+Projeto em [exemplo-01-ecommerce-recomendations-z](./modulo01-fundamentos-de-ia-e-llms-para-programadores/exemplo-01-ecommerce-recomendations-z/)
 
 - https://github.com/recommenders-team/recommenders
 - https://www.databricks.com/blog/guide-to-building-online-recommendation-system
 
 ### 1.4 - Módulo - Web Machine Learning - Como Vencer Qualquer Jogo
 
-Projeto em [exemplo02](./modulo01-fundamentos-de-ia-e-llms-para-programadores/demos/exemplo-02/)
+Projeto em [exemplo-02-vencendo-qualquer-jogo](./modulo01-fundamentos-de-ia-e-llms-para-programadores/exemplo-02-vencendo-qualquer-jogo/)
 
 - https://github.com/ErickWendel/DuckHunt-JS/tree/ml-self-play-template
 - https://github.com/ErickWendel/DuckHunt-JS/tree/ml-self-play
@@ -112,9 +112,9 @@ Projeto em [exemplo02](./modulo01-fundamentos-de-ia-e-llms-para-programadores/de
 
 #### 5.3 - Web AI - Como funciona inteligência artificial na Web com Web AI
 
-Projeto em [exemplo-03-webai01](./modulo01-fundamentos-de-ia-e-llms-para-programadores/demos/exemplo-03-webai01/)
+Projeto em [exemplo-03-webai01](./modulo01-fundamentos-de-ia-e-llms-para-programadores/exemplo-03-webai01/)
 
-Projeto em [exemplo-04-webai02-temperature-and-topK](./modulo01-fundamentos-de-ia-e-llms-para-programadores/demos/exemplo-04-webai02-temperature-and-topK/)
+Projeto em [exemplo-04-webai02-temperature-and-topK](./modulo01-fundamentos-de-ia-e-llms-para-programadores/exemplo-04-webai02-temperature-and-topK/)
 
 - https://x.com/jason_mayes?lang=en
 - https://youtu.be/IC256KyITLw?si=XhuOSVmBEZ6LOjVw&t=62
@@ -135,7 +135,7 @@ Projeto em [exemplo-04-webai02-temperature-and-topK](./modulo01-fundamentos-de-i
 
 #### 5.4 - Web AI - AI multimodal direto em navegadores
 
-Projeto em [exemplo-05-webai03-multimodal/](./modulo01-fundamentos-de-ia-e-llms-para-programadores/demos/exemplo-05-webai03-multimodal/)
+Projeto em [exemplo-05-webai03-multimodal/](./modulo01-fundamentos-de-ia-e-llms-para-programadores/exemplo-05-webai03-multimodal/)
 
 - https://github.com/webmachinelearning/webmcp/blob/main/README.md
 - https://www.youtube.com/watch?v=ka2Zzw_qors&list=PLqFwRPueWb5dAcgxDGg7egpIhGRpcgiLN
@@ -180,7 +180,6 @@ Projeto em [exemplo-05-webai03-multimodal/](./modulo01-fundamentos-de-ia-e-llms-
 #### 7.2 - O que são agentes de IA e como eles tomam decisões em etapas
 
 - https://developer.microsoft.com/blog/spec-driven-development-spec-kit
-- https://developer.microsoft.com/blog/spec-driven-development-spec-kit
 - https://www.marcohaber.dev/blog/git-worktrees
 
 ### 8 - Módulo - MCPs e automação para devs
@@ -197,8 +196,95 @@ Projeto em [erickwendel-contributions-mcp/](https://github.com/ErickWendel/erick
 - https://erickwendel.com.br/
 - https://tml-api.herokuapp.com/graphiql
 
+#### 8.2 - Usando IA para Gerar testes automatizados
+
+Projeto em [exemplo-06-playwright-testes/](./modulo01-fundamentos-de-ia-e-llms-para-programadores/exemplo-06-playwright-testes/)
+
+- https://github.com/microsoft/playwright-mcp
+- https://playwright.dev/docs/test-agents#agent-definitions
+- https://www.linkedin.com/feed/update/urn:li:activity:7381279589840433152/
+
+#### 8.3 - Usando IA para navegação
+
+Projeto em [exemplo-07-playwright-navegacao/](./modulo01-fundamentos-de-ia-e-llms-para-programadores/exemplo-07-playwright-navegacao/)
+
+
+#### 8.4 - Usando IA para consultar documentações atualizadas
+
+Projeto em [exemplo-08-context7/](./modulo01-fundamentos-de-ia-e-llms-para-programadores/exemplo-08-context7/)
+
+
+- https://github.com/upstash/context7#installation
+- https://github.com/ChromeDevTools/chrome-devtools-mcp
+- https://context7.com/
+- https://github.com/upstash/context7
+- https://context7.com/websites/nodejs_api
+- https://nextjs.org/
+- https://www.better-auth.com/
+
+
+#### 8.5 - Usando IA para colher dados de telemetria de apps
+
+Projeto em [exemplo-09-grafana-mcp/](./modulo01-fundamentos-de-ia-e-llms-para-programadores/exemplo-09-grafana-mcp/)
+
+### 9 - Módulo - Modelos open-source vs. proprietários
+
+#### 9.1 - Vantagens e desvantagens de modelos abertos e fechados (e sem censura)
+
+- https://github.com/torch2424/wasmboy?tab=readme-ov-file#wasmboy
+- https://github.com/eugeneyan/open-llms
+- https://ollama.com/library/gpt-oss
+- https://ollama.com/library/llama3.1
+- https://ollama.com/library/gemma3
+- https://ollama.com/search?q=uncensored
+- https://openai.com/open-models/
+- https://fortune.com/2023/07/18/meta-llama-2-ai-open-source-700-million-mau/
+
+#### 9.2 - Como rodar modelos localmente com Ollama
+
+Projeto em [exemplo-10-ollama/](./modulo01-fundamentos-de-ia-e-llms-para-programadores/exemplo-10-ollama/)
+
+- https://ollama.com/search
+- https://docs.vllm.ai/en/latest/
+- https://ollama.com/library/gpt-oss
+- https://openai.com/index/introducing-gpt-oss/
+- https://huggingface.co/mlc-ai/Llama-3-8B-Instruct-q4f32_1-MLC
+- https://llm.mlc.ai/docs/get_started/introduction.html
+- https://cdn.openai.com/pdf/419b6906-9da6-406c-a19d-1bb078ac7637/oai_gpt-oss_model_card.pdf
+- https://ollama.com/blog/vision-models
+- https://docs.ollama.com/integrations/vscode
+- https://www.jan.ai/docs/desktop/llama-cpp-server
+
+#### 9.3 - Como usar OpenRouter para orquestrar vários modelos (e parar de empilhar “licenças”)
+
+Projeto em [exemplo-11-openrouter/](./modulo01-fundamentos-de-ia-e-llms-para-programadores/exemplo-11-openrouter/)
+
+- https://openrouter.ai/
+- https://openrouter.ai/models?max_price=0
+- https://github.com/marketplace?type=models
+
+### 10 - Módulo - RAG, embeddings e busca semântica
+
+#### 10.1 - O que é RAG (Retrieval-Augmented Generation) e por que ele é tão importante
+
+- https://arxiv.org/pdf/2005.11401
+
+#### 10.2 - Embeddings e Vector Databases na prática
+
+Projeto em [exemplo-12-embeddings-neo4j/](./modulo01-fundamentos-de-ia-e-llms-para-programadores/exemplo-12-embeddings-neo4j/)
+
+- https://neo4j.com/
+- https://docs.langchain.com/oss/javascript/integrations/text_embedding/transformers
+
+
+#### 10.3 - Criando o primeiro RAG com JavaScript e Neo4j
+
+Projeto em [exemplo-13-embeddings-neo4j-rag/](./modulo01-fundamentos-de-ia-e-llms-para-programadores/exemplo-13-embeddings-neo4j-rag/)
+
+- https://docs.langchain.com/oss/javascript/langchain/overview
+
 ---
 
-## Problemas no WIndows
+## Problemas no Windows
 
 - [Falha ao instalar o `@tensorflow/tfjs-node`](./windows/tensorflow.md)
