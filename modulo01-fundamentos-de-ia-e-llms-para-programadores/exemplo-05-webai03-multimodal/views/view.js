@@ -70,6 +70,11 @@ export class View {
         this.elements.button.disabled = true;
     }
 
+    /** Exibe avisos informativos sem bloquear o botão de envio. */
+    showWarnings(warnings) {
+        this.elements.output.innerHTML = warnings.join('<br/>');
+    }
+
     setButtonToStopMode() {
         this.elements.button.textContent = 'Parar';
         this.elements.button.classList.add('stop-button');

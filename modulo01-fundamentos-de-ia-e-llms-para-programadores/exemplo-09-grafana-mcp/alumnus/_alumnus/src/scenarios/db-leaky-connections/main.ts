@@ -15,11 +15,11 @@ class DbLeakyConnectionsScenario extends BaseScenario {
   // Connection pool with artificially low limit to make leak visible quickly
   private pool: pg.Pool | null = null
 
-  constructor () {
+  constructor() {
     super('db-leaky-connections')
   }
 
-  protected async _init (app: AppInstance, config: Config, _db: DatabaseConnection): Promise<void> {
+  protected async _init(app: AppInstance, config: Config, _db: DatabaseConnection): Promise<void> {
     // Create a pool with max 2 connections to make the leak fail fast
     // In real scenarios, this would be 10-100 connections
     this.pool = new pg.Pool({
@@ -40,7 +40,7 @@ class DbLeakyConnectionsScenario extends BaseScenario {
    * Create a database connection - simulates a helper function that developers might write
    * The bug: gets connection from pool but never releases it back
    */
-  private async createConnection (_dbUrl: string, app: AppInstance): Promise<pg.PoolClient> {
+  private async createConnection(_dbUrl: string, app: AppInstance): Promise<pg.PoolClient> {
     if (!this.pool) {
       throw new Error('Connection pool not initialized')
     }
@@ -60,7 +60,7 @@ class DbLeakyConnectionsScenario extends BaseScenario {
   /**
    * Cleanup all leaked connections (for reset/terminate)
    */
-  private async cleanupAllConnections (): Promise<number> {
+  private async cleanupAllConnections(): Promise<number> {
     const count = this.leakedConnections.length
 
     for (const client of this.leakedConnections) {
@@ -73,7 +73,7 @@ class DbLeakyConnectionsScenario extends BaseScenario {
     return count
   }
 
-  protected async _registerRoutes (app: AppInstance, config: Config, _db: DatabaseConnection): Promise<void> {
+  protected async _registerRoutes(app: AppInstance, config: Config, _db: DatabaseConnection): Promise<void> {
     // Endpoint that simulates a production bug - creates connections but forgets to clean them up
     app.get('/students/db-leaky-connections', async (_request, reply) => {
       try {
@@ -127,7 +127,7 @@ class DbLeakyConnectionsScenario extends BaseScenario {
 
   }
 
-  protected async _terminate (app: AppInstance): Promise<void> {
+  protected async _terminate(app: AppInstance): Promise<void> {
     app.log.info({
       leakedConnections: this.leakedConnections.length
     }, 'Terminating db-leaky-connections scenario')
@@ -145,7 +145,7 @@ class DbLeakyConnectionsScenario extends BaseScenario {
   /**
    * Get leaked connections count (for testing/monitoring)
    */
-  getLeakedConnectionsCount (): number {
+  getLeakedConnectionsCount(): number {
     return this.leakedConnections.length
   }
 }

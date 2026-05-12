@@ -90,7 +90,7 @@ try {
         console.log(`📌 PERGUNTA: ${question}`);
         console.log('='.repeat(80));
         const result = await ai.answerQuestion(question!)
-        if(result.error) {
+        if (result.error) {
             console.log(`\n❌ Erro: ${result.error}\n`);
             continue
         }

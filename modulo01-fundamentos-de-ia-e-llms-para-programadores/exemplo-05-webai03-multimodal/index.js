@@ -8,7 +8,7 @@ import { FormController } from './controllers/formController.js';
     const aiService = new AIService();
     const translationService = new TranslationService();
     const view = new View();
-    
+
     // Set current year
     view.setYear();
 
@@ -19,13 +19,13 @@ import { FormController } from './controllers/formController.js';
         return;
     }
 
-    // Initialize translation services
-    try {
-        await translationService.initialize();
-    } catch (error) {
-        console.error('Error initializing translation:', error);
-        view.showError([error.message]);
-        return;
+    // Fase 1: verificar disponibilidade da tradução (sem gesto do usuário)
+    // O create() / download do modelo ocorre na fase 2, dentro do gesto do submit
+    const translationWarnings = await translationService.checkAvailability();
+    if (translationWarnings) {
+        console.info('Translation availability warnings:', translationWarnings);
+        // São avisos informativos, não erros fatais — a app continua funcionando
+        view.showWarnings(translationWarnings);
     }
 
     // Get and initialize AI parameters

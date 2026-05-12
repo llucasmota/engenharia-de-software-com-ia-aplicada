@@ -108,12 +108,32 @@ export class AIService {
             this.session.destroy();
         }
 
+        // Verificar quais tipos de entrada são suportados neste dispositivo
+        const expectedInputs = [{ type: "text", languages: ["en"] }];
+
+        const checkCapability = async (type) => {
+            try {
+                const av = await LanguageModel.availability({
+                    expectedInputs: [{ type }],
+                });
+                return av !== 'no' && av !== 'unavailable';
+            } catch {
+                return false;
+            }
+        };
+
+        if (file) {
+            const fileType = file.type.split('/')[0]; // 'image' ou 'audio'
+            if ((fileType === 'image' || fileType === 'audio') && await checkCapability(fileType)) {
+                expectedInputs.push({ type: fileType });
+            } else if (fileType === 'image' || fileType === 'audio') {
+                console.warn(`Capacidade "${fileType}" não disponível neste dispositivo. O arquivo será ignorado.`);
+                file = null; // ignora o arquivo se não suportado
+            }
+        }
+
         this.session = await LanguageModel.create({
-            expectedInputs: [
-                { type: "text", languages: ["en"] },
-                { type: "audio" },
-                { type: "image" },
-            ],
+            expectedInputs,
             expectedOutputs: [{ type: "text", languages: ["en"] }],
             temperature: temperature,
             topK: topK,

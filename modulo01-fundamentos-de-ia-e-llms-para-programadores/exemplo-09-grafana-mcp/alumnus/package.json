@@ -10,9 +10,9 @@
   },
   "scripts": {
     "serve": "cd _alumnus && node --experimental-strip-types --watch src/index.ts",
-    "start": "cd _alumnus && node --experimental-strip-types src/index.ts",
-    "test": "cd _alumnus && NODE_ENV=test node --experimental-strip-types --test test/*.test.ts",
-    "test:watch": "cd _alumnus && NODE_ENV=test node --watch --experimental-strip-types --test test/*.test.ts",
+    "start": "cd _alumnus && node  src/index.ts",
+    "test": "cd _alumnus && NODE_ENV=test node  --test test/*.test.ts",
+    "test:watch": "cd _alumnus && NODE_ENV=test node --watch --test test/*.test.ts",
     "test:docker": "cd apps/alumnus && docker compose -f infra/docker-compose-test.yaml up --build --abort-on-container-exit --exit-code-from alumnus-test",
     "test:docker:down": "cd apps/alumnus && docker compose -f infra/docker-compose-test.yaml down --volumes",
     "lint": "eslint _alumnus",
