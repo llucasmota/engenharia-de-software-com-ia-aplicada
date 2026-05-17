@@ -30,6 +30,8 @@ export const config: ModelConfig = {
         // top 4 para a listagem ordenada por preço
         'arcee-ai/trinity-large-preview:free',
 
+        'openrouter/owl-alpha',
+
         // top 3 para listagem de throughput
         'nvidia/nemotron-3-nano-30b-a3b:free',
     ],
@@ -45,3 +47,5 @@ export const config: ModelConfig = {
         }
     }
 }
+
+

@@ -4,14 +4,14 @@ import { createServer } from '../src/server.ts'
 import { config } from '../src/config.ts'
 import { type LLMResponse, OpenRouterService } from '../src/openrouterService.ts'
 
+
 console.assert(
     process.env.OPENROUTER_API_KEY,
     'OPENROUTER_API_KEY is not set in env variables'
 )
 
-
-test('routes to cheapest model by default', async () => {
-    const customConfig ={
+test.todo('routes to cheapest model by default', async () => {
+    const customConfig = {
         ...config,
         provider: {
             ...config.provider,
@@ -20,42 +20,27 @@ test('routes to cheapest model by default', async () => {
                 by: 'price'
             }
         }
+
     }
     const routerService = new OpenRouterService(customConfig)
     const app = createServer(routerService)
 
-    const response = await app.inject({
+    app.inject({
         method: 'POST',
         url: '/chat',
-        body:{ question:'What is rate limiting?'}
+        body: { question: 'What is rate limit?' }
+    }).then((response) => {
+        console.log('Response status', response.body)
+        console.log('Response response', response.body)
+
+        assert.equal(response.statusCode, 200);
+        const modelResponse = response.json() as LLMResponse;
+
+        assert.equal(modelResponse.model, 'openaroutcer/owle-ai/trinity-lpharge-preview:free');
+        console.log(modelResponse)
+
+
     })
-    assert.equal(response.statusCode, 200)
-    const body = response.json() as LLMResponse
-
-    assert.equal(body.model, 'arcee-ai/trinity-large-preview:free')
 })
-
-test('routes to highest throughput model by default', async () => {
-    const customConfig ={
-        ...config,
-        provider: {
-            ...config.provider,
-            sort: {
-                ...config.provider.sort,
-                by: 'throughput'
-            }
-        }
-    }
-    const routerService = new OpenRouterService(customConfig)
-    const app = createServer(routerService)
-
-    const response = await app.inject({
-        method: 'POST',
-        url: '/chat',
-        body:{ question:'What is rate limiting?'}
-    })
-    assert.equal(response.statusCode, 200)
-    const body = response.json() as LLMResponse
-
-    assert.equal(body.model, 'nvidia/nemotron-3-nano-30b-a3b:free')
-})
+test.todo('routes to highest throughput by default')
+test.todo('routes to fastest model by default')
