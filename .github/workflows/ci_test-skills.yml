@@ -4,9 +4,12 @@ on:
   push:
     branches:
       - 'main'
+    paths:
+      - '.github/workflows/ci_test-skills.yml'
+      - 'skills/**'
   pull_request:
     paths:
-      - '.github/workflows/ci_tests-skills.yml'
+      - '.github/workflows/ci_test-skills.yml'
       - 'skills/**'
   workflow_dispatch:
 
