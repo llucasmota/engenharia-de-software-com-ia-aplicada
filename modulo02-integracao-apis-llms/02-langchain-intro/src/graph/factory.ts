@@ -1,5 +1,3 @@
-import { buildGraph } from "./graph.ts";
+import { buildGraph } from "./graph";
 
-export const graph = ( ) => {
-    return buildGraph()
-}
+export const graph = () => { return buildGraph() } 

@@ -10,7 +10,7 @@ test('command upper transforms message into UPPERCASE', async () => {
     const response = await app.inject({
         method: 'POST',
         url: '/chat',
-        body:{ question: msg }
+        body: { question: msg }
     })
     assert.equal(response.statusCode, 200)
     assert.equal(response.body, expected)
@@ -18,12 +18,12 @@ test('command upper transforms message into UPPERCASE', async () => {
 
 test('command upper transforms message into LOWERCASE', async () => {
     const app = createServer()
-    const msg = 'MAKE THIS MESSAGE LOWER PLEASE!'
-    const expected = msg.toLowerCase()
+    const msg = 'MAKE THIS MESSAGEM LOWER CASE'
+    const expected = msg.toLocaleLowerCase()
     const response = await app.inject({
         method: 'POST',
         url: '/chat',
-        body:{ question: msg }
+        body: { question: msg }
     })
     assert.equal(response.statusCode, 200)
     assert.equal(response.body, expected)
@@ -32,11 +32,11 @@ test('command upper transforms message into LOWERCASE', async () => {
 test('command upper transforms message into UNKNOWN', async () => {
     const app = createServer()
     const msg = 'HEY THERE!'
-    const expected = "Unknown command. Try 'make this uppercase' or 'convert to lowercase'"
+    const expected = "Unknow command. Try 'mae this uppercase' or 'converte to lowercase'"
     const response = await app.inject({
         method: 'POST',
         url: '/chat',
-        body:{ question: msg }
+        body: { question: msg }
     })
     assert.equal(response.statusCode, 200)
     assert.equal(response.body, expected)

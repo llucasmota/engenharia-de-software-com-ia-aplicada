@@ -1,11 +1,11 @@
+import { AIMessage } from "langchain";
 import { type GraphState } from "../graph.ts";
 
 export function upperCaseNode(state: GraphState): GraphState {
-    const responseText = state.output.toUpperCase()
+  const responseText = state.output.toLocaleUpperCase()
 
-    return {
-        ...state,
-        output: responseText,
-    }
-
+  return {
+    ...state,
+    output: responseText,
+  }
 }
