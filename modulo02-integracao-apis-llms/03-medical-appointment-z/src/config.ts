@@ -22,7 +22,7 @@ export const config: ModelConfig = {
   xTitle: 'IA Devs - Prompt Chaining Article Generator',
   models: [
     // https://openrouter.ai/models?fmt=cards&max_price=0&supported_parameters=response_format
-    'arcee-ai/trinity-large-preview:free',
+    'nvidia/nemotron-3-ultra-550b-a55b:free',
   ],
   provider: {
     sort: {

@@ -28,7 +28,10 @@ export const createServer = () => {
                 messages: [new HumanMessage(question)],
             });
 
-            return response
+            return {
+                ...response,
+                success: response.actionSuccess
+            }
 
         } catch (error) {
             console.error('❌ Error processing request:', error);

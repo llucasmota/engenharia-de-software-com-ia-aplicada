@@ -11,11 +11,12 @@ export const IntentSchema = z.object({
 
 export type IntentData = z.infer<typeof IntentSchema>;
 
-export const getSystemPrompt = (professionals: any[]) => {
+export const getSystemPrompt = (professionals: any[] = []) => {
+  const safeProfessionals = professionals || [];
   return JSON.stringify({
     role: 'Intent Classifier for Medical Appointments',
     task: 'Identify user intent and extract all appointment-related details',
-    professionals: professionals.map(p => ({ id: p.id, name: p.name, specialty: p.specialty })),
+    professionals: safeProfessionals.map(p => ({ id: p.id, name: p.name, specialty: p.specialty })),
     current_date: new Date().toISOString(),
     rules: {
       schedule: {

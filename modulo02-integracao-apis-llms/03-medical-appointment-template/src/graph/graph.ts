@@ -9,10 +9,12 @@ import type { BaseMessage } from '@langchain/core/messages';
 
 import { createSchedulerNode } from './nodes/schedulerNode.ts';
 import { createCancellerNode } from './nodes/cancellerNode.ts';
-import { createIdentifyIntentNode} from "./nodes/identifyIntentNode.ts";
+import { createIdentifyIntentNode } from "./nodes/identifyIntentNode.ts";
 import { createMessageGeneratorNode } from "./nodes/messageGeneratorNode.ts";
 
 import { z } from "zod/v3";
+import { OpenRouterService } from "../services/openRouterService.ts";
+import { AppointmentService } from "../services/appointmentService.ts";
 
 const AppointmentStateAnnotation = z.object({
   messages: withLangGraph(
@@ -36,17 +38,17 @@ const AppointmentStateAnnotation = z.object({
 
 export type GraphState = z.infer<typeof AppointmentStateAnnotation>;
 
-export function buildAppointmentGraph() {
+export function buildAppointmentGraph(llmClient: OpenRouterService, appointmentService: AppointmentService) {
 
 
   // Build workflow graph
   const workflow = new StateGraph({
     stateSchema: AppointmentStateAnnotation,
   })
-    .addNode('identifyIntent', createIdentifyIntentNode())
-    .addNode('schedule', createSchedulerNode())
-    .addNode('cancel', createCancellerNode())
-    .addNode('message', createMessageGeneratorNode())
+    .addNode('identifyIntent', createIdentifyIntentNode(llmClient))
+    .addNode('schedule', createSchedulerNode(appointmentService))
+    .addNode('cancel', createCancellerNode(appointmentService))
+    .addNode('message', createMessageGeneratorNode(llmClient))
 
     // Flow
     .addEdge(START, 'identifyIntent')
