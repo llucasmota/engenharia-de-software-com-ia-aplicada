@@ -1,0 +1,21 @@
+{
+  "name": "@temporal-workshop/mock-http",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "json-server": "1.0.0-beta.15"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.5"
+  }
+}

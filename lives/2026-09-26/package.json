@@ -1,0 +1,29 @@
+{
+  "name": "temporal-workshop",
+  "version": "1.0.0",
+  "description": "Temporal Process Manager workshop",
+  "license": "ISC",
+  "author": "Bruno Delgado",
+  "type": "module",
+  "packageManager": "pnpm@12.4.2",
+  "scripts": {
+    "build": "pnpm -r --if-present build",
+    "dev": "concurrently --kill-others-on-fail --names temporal,process-manager,inventory,billing,shipping \"pnpm run infra:up\" \"pnpm run process-manager:up\" \"pnpm run inventory:up\" \"pnpm run billing:up\" \"pnpm run shipping:up\"",
+    "inventory:up": "pnpm --filter @temporal-workshop/inventory dev",
+    "billing:up": "pnpm --filter @temporal-workshop/billing dev",
+    "shipping:up": "pnpm --filter @temporal-workshop/shipping dev",
+    "process-manager:up": "pnpm --filter @temporal-workshop/process-manager dev",
+    "order:create": "node scripts/order-create.mjs",
+    "order:get": "node scripts/order-get.mjs",
+    "order:fail:inventory": "node scripts/order-fail-inventory.mjs",
+    "order:fail:payment": "node scripts/order-fail-payment.mjs",
+    "infra:up": "docker compose up -d temporal",
+    "infra:down": "docker compose down",
+    "typecheck": "pnpm -r --if-present typecheck"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "concurrently": "^9.0.0",
+    "typescript": "^5.0.0"
+  }
+}

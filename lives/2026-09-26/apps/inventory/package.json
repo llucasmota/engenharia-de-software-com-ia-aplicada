@@ -1,0 +1,14 @@
+{
+  "name": "@temporal-workshop/inventory",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "node --experimental-strip-types src/main.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@temporal-workshop/contracts": "workspace:*",
+    "@temporal-workshop/mock-http": "workspace:*"
+  }
+}
