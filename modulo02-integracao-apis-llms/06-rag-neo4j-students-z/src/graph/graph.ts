@@ -21,9 +21,9 @@ import { createExtractQuestionNode } from './nodes/extractQuestionNode.ts';
 
 const SalesStateAnnotation = z.object({
   // Input
-    messages: withLangGraph(
-      z.custom<BaseMessage[]>(),
-      MessagesZodMeta),
+  messages: withLangGraph(
+    z.custom<BaseMessage[]>(),
+    MessagesZodMeta),
   question: z.string().optional(),
 
   // Cypher generation
@@ -80,16 +80,20 @@ export function buildSalesGraph(
     .addEdge('cypherGenerator', 'cypherExecutor')
 
     .addConditionalEdges('cypherExecutor', (state: GraphState) => {
+      // // Se houver erro terminal, vai direto para a resposta analítica (que trata o erro)
+      // if (state.error) {
+      //   return 'analyticalResponse';
+      // }
+      // Auto-correção se necessário
       if (state.needsCorrection && (!state.correctionAttempts || state.correctionAttempts < 1)) {
         return 'cypherCorrection';
       }
-
+      // Próximo passo se for multi-step
       if (state.isMultiStep && state.subQuestions && state.currentStep !== undefined) {
         if (state.currentStep < state.subQuestions.length) {
           return 'cypherGenerator';
         }
       }
-
       return 'analyticalResponse';
     })
 

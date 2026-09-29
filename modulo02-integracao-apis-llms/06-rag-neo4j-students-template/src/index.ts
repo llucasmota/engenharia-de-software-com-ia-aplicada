@@ -15,10 +15,10 @@ app.inject({
     method: 'POST',
     url: '/sales',
     payload: {
-        question: 'Which courses are commonly bought together?', // complex
+        // question: 'Which courses are commonly bought together?', // complex
         // question: "Find courses that students typically purchase after 'Machine Learning em Navegadores'", // complex
         // question: 'Show me the revenue distribution across all courses',
-        // question: 'Which users have progressed over 80%?',
+        question: 'Which users have progressed over 80%?',
     },
 }).then(response => {
     console.log(JSON.parse(response.body)?.answer);

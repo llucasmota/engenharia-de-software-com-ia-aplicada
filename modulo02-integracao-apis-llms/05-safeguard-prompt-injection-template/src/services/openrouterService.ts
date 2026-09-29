@@ -2,6 +2,8 @@ import { ChatOpenAI } from '@langchain/openai';
 import { config, type ModelConfig } from '../config.ts';
 import { SystemMessage, HumanMessage } from '@langchain/core/messages';
 import { createAgent } from 'langchain';
+import { getMcpTools } from './mcpService.ts';
+import { PromptTemplate } from '@langchain/core/prompts';
 
 export type GuardrailResult = {
     safe: boolean;
@@ -13,11 +15,13 @@ export type GuardrailResult = {
 export class OpenRouterService {
     private config: ModelConfig;
     private llmClient: ChatOpenAI;
+    private safeGuardModel: ChatOpenAI;
     private fsAgent: ReturnType<typeof createAgent> | null = null;
 
     constructor(configOverride?: ModelConfig) {
         this.config = configOverride ?? config;
-        this.llmClient = this.#createChatModel(this.config.models[0]);
+        this.llmClient = this.#createChatModel(this.config.guardrailsModel);
+        this.safeGuardModel = this.#createChatModel(this.config.guardrailsModel);
     }
 
     #createChatModel(modelName: string): ChatOpenAI {
@@ -46,9 +50,10 @@ export class OpenRouterService {
     ): Promise<string> {
 
         if (!this.fsAgent) {
+            const tools = await getMcpTools()
             this.fsAgent = createAgent({
                 model: this.llmClient,
-                tools: [],
+                tools,
             });
         }
 
@@ -63,4 +68,28 @@ export class OpenRouterService {
         return content;
     }
 
+    async checkGuardRails(userInput: string, enable: boolean = true) {
+        if (!enable) {
+            return { safe: true, reason: 'Guardrails disabled' }
+
+        }
+
+        const template = PromptTemplate.fromTemplate(userInput);
+        const input = await template.format({
+            USER_INPUT: userInput,
+        });
+
+        const response = await this.safeGuardModel.invoke([
+            {
+                role: 'user',
+                content: input
+            }
+        ])
+
+        const result = response.text.trim()
+        1;
+    }
+
+
 }
+

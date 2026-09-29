@@ -21,9 +21,9 @@ import { createExtractQuestionNode } from './nodes/extractQuestionNode.ts';
 
 const SalesStateAnnotation = z.object({
   // Input
-    messages: withLangGraph(
-      z.custom<BaseMessage[]>(),
-      MessagesZodMeta),
+  messages: withLangGraph(
+    z.custom<BaseMessage[]>(),
+    MessagesZodMeta),
   question: z.string().optional(),
 
   // Cypher generation

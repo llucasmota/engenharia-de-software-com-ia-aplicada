@@ -30,17 +30,21 @@ export function createCypherGeneratorNode(
     try {
 
       const stepInfo = getCurrentStepQuestion(state)
+
       const targetQuestion = stepInfo?.question ?? state.question!
+
       if (stepInfo) {
         const totalSteps = state.subQuestions?.length ?? 0;
+
         console.log(`🤖 Generating Cypher query for step ${stepInfo.stepNumber}/${totalSteps}: "${targetQuestion}"`);
+
       } else {
         console.log('🤖 Generating Cypher query...');
       }
 
       const schema = await neo4jService.getSchema()
       const systemPrompt = await getSystemPrompt(schema, SALES_CONTEXT)
-      const userPrompt = await getUserPromptTemplate(targetQuestion)
+      const userPrompt = getUserPromptTemplate(targetQuestion)
 
       const { data, error } = await llmClient.generateStructured(
         systemPrompt,
@@ -48,23 +52,25 @@ export function createCypherGeneratorNode(
         CypherQuerySchema,
       )
 
-      if(error) {
+      if (error) {
         return {
           error: `Failed to generate query: ${error ?? 'Unknown error'}`,
         }
       }
 
       console.log(`✅ Generated Cypher query: ${data?.query}`);
-      if(state.isMultiStep && state.subQueries?.length) {
+
+      if (state.isMultiStep && state.subQueries?.length) {
         return {
           query: data?.query,
-          subQueries: [...state.subQueries, data?.query ?? ""]
+          subQueries: [...state.subQueries, data?.query ?? '']
         }
       }
-
       return {
-        query: data?.query,
-      };
+        query: data?.query
+      }
+
+
 
     } catch (error: any) {
       console.error('Error generating Cypher query:', error.message);

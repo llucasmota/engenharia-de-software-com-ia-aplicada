@@ -4,7 +4,7 @@ export const config = {
   xTitle: 'IA Devs - Document Q&A',
   models: [
     // Using a vision-capable model for multimodal document analysis
-    'google/gemini-2.5-flash-lite-preview-09-2025',
+    'google/gemini-embedding-2',
     // Alternative models with vision support:
     // 'anthropic/claude-3.5-sonnet',
     // 'openai/gpt-4o',

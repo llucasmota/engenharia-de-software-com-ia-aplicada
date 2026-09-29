@@ -9,7 +9,7 @@ export function buildSalesQAGraph() {
     graph: buildSalesGraph(llmClient, neo4jService),
     llmClient,
     neo4jService,
-  }
+  };
 }
-
-export const graph = buildSalesQAGraph();
+const factory = buildSalesQAGraph();
+export const graph = factory.graph;
