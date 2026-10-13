@@ -1,0 +1,3 @@
+Total Revenue Calculation from Sales Data
+
+The total revenue from the sales data is $741.80.

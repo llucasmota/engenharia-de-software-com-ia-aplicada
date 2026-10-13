@@ -22,7 +22,10 @@ export const config: ModelConfig = {
   httpReferer: '',
   xTitle: 'IA Devs - Transforming Services into Tools',
   models: [
-    'arcee-ai/trinity-large-preview:free',
+    // 'liquid/lfm-2.5-2.6b:free',
+    'dots-studio/dots-3-note-preview:free',
+    'google/gemma-4-26b-a4b-it:free',
+    'openai/gpt-4o-mini'
   ],
   provider: {
     sort: {

@@ -1,0 +1,18 @@
+TOP 5 MOST SOLD PRODUCTS
+=======================
+
+Based on sales data from products.csv:
+
+Rank | Product   | Sales
+-----|-----------|-------
+1    | beans     | 4
+2    | toothpaste| 1
+3    | soap      | 1
+4    | rice      | 1
+5    | shampoo   | 1
+
+Summary:
+- beans is the best-selling product with 4 units sold
+- All other products have equal sales of 1 unit each
+- Total products analyzed: 5 unique products
+- Total sales records: 8 transactions

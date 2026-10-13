@@ -1,0 +1,18 @@
+SALES REVENUE ANALYSIS REPORT
+============================
+
+Total Revenue: $71.33
+
+Sales Details:
+- 8 transactions total
+- Date: 2024-01-01
+
+Product Breakdown:
+- shampoo: $10.99 (1 item)
+- soap: $5.49 (1 item)
+- toothpaste: $3.99 (1 item)
+- rice: $22.90 (1 item)
+- beans: $27.96 (4 items @ $6.99 each)
+
+Calculation:
+10.99 + 5.49 + 3.99 + 22.90 + 6.99 + 6.99 + 6.99 + 6.99 = 71.33
