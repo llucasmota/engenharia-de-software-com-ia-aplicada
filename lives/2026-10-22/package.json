@@ -1,0 +1,22 @@
+{
+  "name": "jev-guardinha",
+  "version": "1.0.0",
+  "private": true,
+  "description": "O guardinha da Lia: uma chamada ao Jev (TypeSafe) decide se a mensagem pode seguir para o LLM",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "tsx src/iniciar.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@typesafe-ai/sdk": "^0.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}
