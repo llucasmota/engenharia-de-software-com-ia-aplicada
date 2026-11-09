@@ -1,13 +1,10 @@
-import { decrypt, encrypt } from "./service.ts";
+import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { server } from "./mcp.ts";
 
 async function main() {
-    const myMessage = "Hello, World!";
-    const encryptionKey = "my-secret-passphrase";
-
-    const encryptedMessage = encrypt(myMessage, encryptionKey);
-    console.log("Encrypted message:", encryptedMessage);
-    const decryptedMessage = decrypt(encryptedMessage, encryptionKey);
-    console.log("Decrypted message:", decryptedMessage);
+    const tranbsport = new StdioServerTransport();
+    await server.connect(tranbsport);
+    console.error('Encrypt MCP Seever running on stdio')
 }
 
 main().catch((error) => {
